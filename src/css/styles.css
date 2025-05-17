@@ -6,9 +6,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 0 auto;
-  margin-top: 40px;
-  margin-bottom: 40px;
+  justify-content: center;
+  margin: 40px auto;
 }
 .form-input {
   border: 1px solid #808080;
@@ -17,7 +16,7 @@
   height: 40px;
   padding: 8px 16px 8px 16px;
   margin-right: 8px;
-  margin-left: 300px;
+
 }
 .form-btn {
   border-radius: 8px;
@@ -39,8 +38,7 @@
   justify-content: center;
 }
 .photo-card {
-  border: 1px;
-  border-color: #808080;
+  border: 1px solid #808080;
   width: 360px;
   height: 200px;
   overflow: hidden;
@@ -51,7 +49,7 @@
 .photo-card a {
   display: block;
   height: 152px;
-  /* 200 - 48 = 152 */
+  
 }
 .photo-card img {
   width: 100%;
