@@ -26,3 +26,19 @@ export function createMarkup(images) {
     )
     .join('');
 }
+export function renderGallery(container, images, lightboxInstance) {
+  container.innerHTML = createMarkup(images);
+  lightboxInstance.refresh();
+}
+
+export function clearGallery(container) {
+  container.innerHTML = '';
+}
+
+export function showLoader(loaderEl) {
+  loaderEl.classList.remove('is-hidden');
+}
+
+export function hideLoader(loaderEl) {
+  loaderEl.classList.add('is-hidden');
+}

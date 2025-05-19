@@ -4,7 +4,13 @@ import 'izitoast/dist/css/iziToast.min.css';
 import axios from 'axios';
 
 import { fetchImages } from './js/pixabay-api.js';
-import { createMarkup } from './js/render-functions.js';
+import {
+  createMarkup,
+  renderGallery,
+  clearGallery,
+  showLoader,
+  hideLoader,
+} from './js/render-functions.js';
 
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -32,7 +38,7 @@ refs.formEl.addEventListener('submit', e => {
     });
     return;
   }
-  refs.loader.classList.remove('is-hidden');
+  showLoader(refs.loader);
 
   fetchImages(userValue)
     .then(data => {
@@ -41,13 +47,10 @@ refs.formEl.addEventListener('submit', e => {
           message: 'Sorry, there are no images matching your search query.',
           position: 'topRight',
         });
-        refs.galleryEl.innerHTML = ''; /*  очищаємо попередню галерею */
+        clearGallery(refs.galleryEl);
         return;
       }
-      const markup = createMarkup(data.hits);
-      refs.galleryEl.innerHTML = markup;
-
-      gallery.refresh(); /* оновлюєсо саме ТУТ після вставки  */
+      renderGallery(refs.galleryEl, data.hits, gallery);
     })
     .catch(error => {
       iziToast.error({
@@ -57,7 +60,7 @@ refs.formEl.addEventListener('submit', e => {
       console.error(error);
     })
     .finally(() => {
-      refs.loader.classList.add('is-hidden');
+      hideLoader(refs.loader);
     });
 
   e.target.reset();
